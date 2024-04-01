@@ -113,7 +113,11 @@ func (h *Server) userOrderUpload(res http.ResponseWriter, req *http.Request) {
 	var buf bytes.Buffer
 
 	uid := ctx.Value(constants.UserIDKey)
-	userID := uid.(int64)
+	userID, ok := uid.(int64)
+	if !ok {
+		http.Error(res, "", http.StatusUnauthorized)
+		return
+	}
 
 	_, err := buf.ReadFrom(req.Body)
 	if err != nil {
@@ -148,7 +152,11 @@ func (h *Server) userOrdersList(res http.ResponseWriter, req *http.Request) {
 	defer cancel()
 
 	uid := ctx.Value(constants.UserIDKey)
-	userID := uid.(int64)
+	userID, ok := uid.(int64)
+	if !ok {
+		http.Error(res, "", http.StatusUnauthorized)
+		return
+	}
 
 	list, status, err := h.orderMart.OrdersList(ctx, userID)
 	if err != nil {
@@ -174,7 +182,11 @@ func (h *Server) userBalance(res http.ResponseWriter, req *http.Request) {
 	defer cancel()
 
 	uid := ctx.Value(constants.UserIDKey)
-	userID := uid.(int64)
+	userID, ok := uid.(int64)
+	if !ok {
+		http.Error(res, "", http.StatusUnauthorized)
+		return
+	}
 
 	currentBalance, err := h.balanceMart.UserBalance(ctx, userID)
 	if err != nil {
@@ -198,7 +210,11 @@ func (h *Server) userWithdrawals(res http.ResponseWriter, req *http.Request) {
 	defer cancel()
 
 	uid := ctx.Value(constants.UserIDKey)
-	userID := uid.(int64)
+	userID, ok := uid.(int64)
+	if !ok {
+		http.Error(res, "", http.StatusUnauthorized)
+		return
+	}
 
 	withdrawalsList, err := h.balanceMart.UserWithrawalsList(ctx, userID)
 	if err != nil {
@@ -232,7 +248,11 @@ func (h *Server) userWithdraw(res http.ResponseWriter, req *http.Request) {
 	defer cancel()
 
 	uid := ctx.Value(constants.UserIDKey)
-	userID := uid.(int64)
+	userID, ok := uid.(int64)
+	if !ok {
+		http.Error(res, "", http.StatusUnauthorized)
+		return
+	}
 
 	var buf bytes.Buffer
 	var reqData wReq

@@ -13,7 +13,7 @@ const (
 
 // интервалы
 const (
-	DBContextTimeout  time.Duration = time.Duration(50) * time.Second // длительность запроса в контексте работы с БД и сетью
+	DBContextTimeout  time.Duration = time.Duration(10) * time.Second // длительность запроса в контексте работы с БД и сетью
 	HTTPAttemtPeriods string        = "1s,2s,5s"
 )
 
@@ -84,4 +84,12 @@ type key int
 
 const (
 	UserIDKey key = iota
+)
+
+const (
+	StatusInternalServerError = "внутренняя ошибка сервера"
+	StatusSuccessfulRequest   = "успешная обработка запроса"
+	StatusUnauthorized        = "пользователь не авторизован"
+	StatusBadRequestFormat    = "неверный формат запроса"
+	StatusBadNumberFormat     = "неверный формат номера заказа"
 )
