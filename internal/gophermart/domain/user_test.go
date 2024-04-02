@@ -99,7 +99,7 @@ func TestAddUser(t *testing.T) {
 	login = "us"
 	password = "f7H456789"
 	passCrypted = PassHash(password)
-	//m.EXPECT().Create(ctx, login, passCrypted).Return(int64(0), constants.RegisterOk, nil)
+	m.EXPECT().Create(ctx, login, passCrypted).Return(int64(0), constants.RegisterOk, nil).AnyTimes()
 
 	userModel = NewUserModel(m)
 	token, status, err = userModel.AddUser(ctx, login, password)
@@ -110,7 +110,7 @@ func TestAddUser(t *testing.T) {
 	login = "usddd"
 	password = "f7456789"
 	passCrypted = PassHash(password)
-	//m.EXPECT().Create(ctx, login, passCrypted).Return(int64(0), constants.RegisterOk, nil)
+	m.EXPECT().Create(ctx, login, passCrypted).Return(int64(0), constants.RegisterOk, nil).AnyTimes()
 
 	userModel = NewUserModel(m)
 	token, status, err = userModel.AddUser(ctx, login, password)
