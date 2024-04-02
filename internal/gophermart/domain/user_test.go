@@ -102,7 +102,7 @@ func TestAddUser(t *testing.T) {
 	m.EXPECT().Create(ctx, login, passCrypted).Return(int64(0), constants.RegisterOk, nil).AnyTimes()
 
 	userModel = NewUserModel(m)
-	token, status, err = userModel.AddUser(ctx, login, password)
+	_, _, err = userModel.AddUser(ctx, login, password)
 
 	require.Error(t, err, "Должна быть ошибка длины логина")
 
@@ -113,7 +113,7 @@ func TestAddUser(t *testing.T) {
 	m.EXPECT().Create(ctx, login, passCrypted).Return(int64(0), constants.RegisterOk, nil).AnyTimes()
 
 	userModel = NewUserModel(m)
-	token, status, err = userModel.AddUser(ctx, login, password)
+	_, _, err = userModel.AddUser(ctx, login, password)
 
 	require.Error(t, err, "Должна быть ошибка некорретный пароль")
 
