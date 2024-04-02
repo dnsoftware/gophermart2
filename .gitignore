@@ -24,3 +24,5 @@ vendor/
 
 *.log
 cmd/gophermart/log.log
+
+coverage.html
