@@ -21,3 +21,8 @@ vendor/
 # IDEs directories
 .idea
 .vscode
+
+*.log
+cmd/gophermart/log.log
+
+coverage.html
